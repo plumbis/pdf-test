@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DocRaptor Ebook</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <style type="text/css">
+      @page {
+        size: US-Letter;
+        margin: 0 0 1in 0;
+        @bottom {
+          font-style: italic;
+          opacity: .75;
+          content: "generated for you@example.com";
+        }
+      }
+    </style>
+  </head>
+  <body>
+
+    <span>
+    
+        <article class="markdown">
+            
+                </span><span class="chapter">
+            
+            <span class="toc1">
+                <h1>
+                    <a id="cumulus-netq"></a>Cumulus NetQ</h1>
+            </span><p>Cumulus® NetQ is a highly-scalable, modern network operations tool set that provides visibility into your overlay and underlay networks in real-time. NetQ delivers actionable insights and operational intelligence about the health of your data center - from the container, virtual machine, or host, all the way to the switch and port.</p>
+</article>
+    
+        <article class="markdown">
+            
+                </span><span class="chapter">
+            
+            <span class="toc1">
+                <h1>
+                    <a id="Cumulus-NetQ-Deployment-Guide"></a>Cumulus NetQ Deployment Guide</h1>
+            </span><p>This guide is intended for network administrators who are responsible
+for installation, setup, and maintenance of Cumulus NetQ in their data
+center environment. NetQ offers the ability to monitor and manage your
+data center network infrastructure and operational health with simple
+tools based on open source Linux. This guide provides instructions and
+information about installing NetQ core capabilities, configuring
+optional capabilities, and upgrading an existing NetQ installation. This
+guide assumes you have already installed Cumulus Linux on your network
+switches and you are ready to add these NetQ capabilities.</p>
+
+<p>For information about monitoring and troubleshooting your network, refer
+to the <a href="/cumulus-netq/Cumulus-NetQ-CLI-User-Guide/">Cumulus NetQ CLI User
+Guide</a> or the
+<a href="/cumulus-netq/Cumulus-NetQ-UI-User-Guide">Cumulus NetQ UI User
+Guide</a>.</p>
+
+
+<div class="notices tip" > <p>Before you get started, you should review the <a href="https://support.cumulusnetworks.com/hc/en-us/articles/360036416953">release
+notes</a>
+for this version.</p>
+ </div>
+
+</article>
+    
+        <article class="markdown">
+            
+            <span class="toc2">
+                <h1>
+                    <a id="NetQ-Basics"></a>Cumulus NetQ Overview</h1>
+            </span>
+
+<p>Cumulus® NetQ is a highly-scalable, modern network operations tool set
+that provides visibility and troubleshooting of your overlay and
+underlay networks in real-time. NetQ delivers actionable insights and
+operational intelligence about the health of your data center - from the
+container, virtual machine, or host, all the way to the switch and port.
+NetQ correlates configuration and operational status, and instantly
+identifies and tracks state changes while simplifying management for the
+entire Linux-based data center. With NetQ, network operations change
+from a manual, reactive, box-by-box approach to an automated, informed
+and agile one.</p>
+
+<p>Cumulus NetQ performs three primary
+functions:</p>
+
+<ul>
+<li><strong>Data collection</strong>: real-time and historical telemetry and network
+state information</li>
+<li><strong>Data analytics</strong>: deep processing of the data</li>
+<li><strong>Data visualization</strong>: rich graphical user interface (GUI) for
+actionable insight</li>
+</ul>
+
+<p>NetQ is available as an on-site or in-cloud deployment.</p>
+
+<p>Unlike other network operations tools, NetQ delivers significant
+operational improvements to your network
+management and maintenance processes. It simplifies the data center
+network by reducing the complexity through real-time visibility into
+hardware and software status and eliminating the guesswork associated
+with investigating issues through the analysis and presentation of
+detailed, focused data.</p>
+
+<h2 id="demystify-overlay-networks">Demystify Overlay Networks</h2>
+
+<p>While overlay networks provide significant advantages in network
+management, it can be difficult to troubleshoot issues that occur in the
+overlay one box at a time. You are unable to correlate what events
+(configuration changes, power outages, etc.) may have caused problems in
+the network and when they occurred. Only a sampling of data is available
+to use for your analysis. By contrast, with Cumulus NetQ deployed, you
+have a network-wide view of the overlay network, can correlate events
+with what is happening now or in the past, and have real-time data to
+fill out the complete picture of your network health and operation.</p>
+
+<p>In summary:</p>
+
+<table>
+<thead>
+<tr>
+<th>Without NetQ</th>
+<th>With NetQ</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Difficult to debug overlay network</td>
+<td>View network-wide status of overlay network</td>
+</tr>
+
+<tr>
+<td>Hard to find out what happened in the past</td>
+<td>View historical activity with time-machine view</td>
+</tr>
+
+<tr>
+<td>Periodically sampled data</td>
+<td>Real-time collection of telemetry data for a more complete data set</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="protect-network-integrity-with-netq-validation">Protect Network Integrity with NetQ Validation</h2>
+
+<p>Network configuration changes can cause numerous trouble tickets because
+you are not able to test a new configuration before deploying it. When
+the tickets start pouring in, you are stuck with a large amount of data
+that is collected and stored in multiple tools making correlation of the
+events to the resolution required difficult at best. Isolating faults in
+the past is challenging. By contract, with Cumulus NetQ deployed, you
+can proactively verify a configuration change as inconsistencies and
+misconfigurations can be caught prior to deployment. And historical data
+is readily available to correlate past events with current issues.</p>
+
+<p>In summary:</p>
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><p>Without NetQ</p></th>
+<th><p>With NetQ</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><p>Reactive to trouble tickets</p></td>
+<td><p>Catch inconsistencies and misconfigurations prior to deployment with integrity checks/validation</p></td>
+</tr>
+<tr class="even">
+<td><p>Large amount of data and multiple tools to<br />
+correlate the logs/events with the issues</p></td>
+<td><p>Correlate network status, all in one place</p></td>
+</tr>
+<tr class="odd">
+<td><p>Periodically sampled data</p></td>
+<td><p>Readily available historical data for viewing and correlating changes in the past with current issues</p></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="troubleshoot-issues-across-the-network">Troubleshoot Issues Across the Network</h2>
+
+<p>Troubleshooting networks is challenging in the best of times, but trying
+to do so manually, one box at a time, and digging through a series of
+long and ugly logs make the job harder than it needs to be. Cumulus NetQ
+provides rolled up and correlated network status on a regular basis,
+enabling you to get down to the root of the problem quickly, whether it
+occurred recently or over a week ago. The graphical user interface makes
+this possible visually to speed the analysis.</p>
+
+<p>In summary:</p>
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><p>Without NetQ</p></th>
+<th><p>With NetQ</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><p>Large amount of data and multiple tools to<br />
+correlate the logs/events with the issues</p></td>
+<td><p>Rolled up and correlated network status, view events and status together</p></td>
+</tr>
+<tr class="even">
+<td><p>Past events are lost</p></td>
+<td><p>Historical data gathered and stored for comparison with current network state</p></td>
+</tr>
+<tr class="odd">
+<td><p>Manual, box-by-box troubleshooting</p></td>
+<td><p>View issues on all devices all at once, pointing to the source of the problem</p></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="track-connectivity-with-netq-trace">Track Connectivity with NetQ Trace</h2>
+
+<p>Conventional trace only traverses the data path looking for problems,
+and does so on a node to node basis. For paths with a small number of
+hops that might be fine, but in larger networks, it can become extremely
+time consuming. With Cumulus NetQ both the data and control paths are
+verified providing additional information. It discovers
+misconfigurations along all of the hops in one go, speeding the time to
+resolution.</p>
+
+<p>In summary:</p>
+
+<table>
+<thead>
+<tr>
+<th>Without NetQ</th>
+<th>With NetQ</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Trace covers only data path; hard to check control path</td>
+<td>Both data and control paths are verified</td>
+</tr>
+
+<tr>
+<td>View portion of entire path</td>
+<td>View all paths between devices all at once to find problem paths</td>
+</tr>
+
+<tr>
+<td>Node-to-node check on misconfigurations</td>
+<td>View any misconfigurations along all hops from source to destination</td>
+</tr>
+</tbody>
+</table>
+</article>
+    
+        <article class="markdown">
+            
+            <span class="toc3">
+                <h1>
+                    <a id="Integrate-with-Grafana"></a>Integrate NetQ with Grafana</h1>
+            </span>
+
+<p>Switches collect statistics about the performance of their interfaces.
+The NetQ Agent on each switch collects these statistics every 15 seconds and then sends them to your NetQ
+Server or Appliance.</p>
+
+<p>NetQ only collects statistics for physical interfaces; it does not
+collect statistics for virtual (non-physical) interfaces, such as bonds, bridges,
+and VXLANs. Specifically, the NetQ Agent collects the following
+interface statistics:</p>
+
+<ul>
+<li><p><strong>Transmit</strong>: tx_bytes, tx_carrier, tx_colls, tx_drop, tx_errs,
+tx_packets</p></li>
+
+<li><p><strong>Receive</strong>: rx_bytes, rx_drop, rx_errs, rx_frame,
+rx_multicast, rx_packets</p></li>
+</ul>
+
+<p>You can use <a href="https://grafana.com/">Grafana</a>, an open source analytics and monitoring tool, to view the interface statistics collected by the NetQ Agents. The fastest way to achieve this is by installing Grafana on an application server or locally per user, and then importing the prepared NetQ dashboard.</p>
+
+<h2 id="install-netq-plug-in-for-grafana">Install NetQ Plug-in for Grafana</h2>
+
+<p>The first step is to install the NetQ plug-in on your NetQ server or appliance. There are three ways to install the plug-in:</p>
+
+<ul>
+<li><p><strong>Docker File</strong>: Add the following to your existing Dockerfile</p>
+
+<pre><code># grafana docker file
+FROM grafana/grafana:6.2.2
+RUN grafana-cli --pluginUrl https://netq-grafana-dsrc.s3-us-west-2.amazonaws.com/dist.zip plugins install netq-dashboard
+</code></pre></li>
+
+<li><p><strong>Grafana Docker Image</strong>: Download and run the plug-in in your Grafana Docker container</p>
+
+<pre><code>$ docker run -d -p 3000:3000 --name=grafana -e &quot;GF_INSTALL_PLUGINS=https://netq-grafana-dsrc.s3-us-west-2.amazonaws.com/dist.zip;netq-dashboard&quot; grafana/grafana
+</code></pre></li>
+
+<li><p><strong>Grafana CLI</strong>: Download and install the Grafana plug-in using Grafana CLI</p>
+
+<pre><code>brew update
+brew install grafana
+brew services start grafana
+grafana-cli --pluginUrl https://netq-grafana-dsrc.s3-us-west-2.amazonaws.com/dist.zip plugins install netq-dashboard
+brew services restart grafana
+</code></pre>
+
+<p>Then restart Grafana.</p>
+
+
+<div class="notices info" > <p>The Grafana GUI is accessed through port 3000 by default. If you are
+running Grafana on a simulation server, you may need to modify
+forwarding rules in IPtables to allow access to port 3000.</p>
+ </div>
+</li>
+</ul>
+
+<h2 id="set-up-a-dashboard">Set Up a Dashboard</h2>
+
+<p>The quickest way to view the interface statistics for your Cumulus Linux network is to make use of the pre-configured dashboard installed with the plug-in. Once you are familiar with that dashboard, you can create new dashboards or add new panels to the NetQ dashboard.</p>
+
+<ol>
+<li><p>Open the Grafana user interface:</p>
+
+<ul>
+<li><strong>Remote access</strong>: Enter <em>&lt;NetQ-Server-or-Appliance-IPaddr&gt;:3000</em> in a web browser address field.</li>
+<li><strong>Local access</strong>:  Enter <em>localhost:3000</em> in a web browser address field.</li>
+</ul></li>
+
+<li><p>Log in using your application credentials.</p>
+
+
+
+
+<p>The Home Dashboard appears.</p>
+
+
+</li>
+
+<li><p>Click <strong>Add data source</strong> or 
+  
+  
+
+ &gt; <em>Data Sources</em>.</p>
+
+
+</li>
+
+<li><p>Enter <strong>Net-Q</strong> in the search box or scroll down to the <strong>Other</strong> category, and select <em>Net-Q</em> from there.</p></li>
+
+<li><p>Enter <em>Net-Q</em> into the <strong>Name</strong> field.</p></li>
+
+<li><p>Enter the URL used to access the NetQ cloud service; for example <em>api.netq.cumulusnetworks.com</em></p></li>
+
+<li><p>Enter your credentials (the ones used to login)</p></li>
+
+<li><p>For cloud deployments only, if you have more than one premises configured, you can select the premises you want to view, as follows:</p>
+
+<ul>
+<li>If you leave the <strong>Premises</strong> field blank, the first premises name is selected by default</li>
+
+<li><p>If you enter a premises name, that premises is selected for viewing</p>
+
+<p><em>Note</em>: If multiple premises are configured with the same name, then the first premises of that name is selected for viewing</p></li>
+</ul></li>
+
+<li><p>Click <strong>Save &amp; Test</strong></p></li>
+</ol>
+
+<h2 id="create-a-dashboard">Create a Dashboard</h2>
+
+<p>You can either use the dashboard provided with the plug-in, NetQ Interface Statistics, or create your own.</p>
+
+<p>To use the Cumulus-provided dashboard, select the <em>NetQ Interface Statistics</em> from the left panel of the Home Page.</p>
+
+
+
+
+<p>If you choose this option, you can skip directly to <a href="#analyze-the-data">analyzing your data</a>.</p>
+
+<p>To create your own dashboard:</p>
+
+<ol>
+<li><p>Click 
+  
+
+
+ to open a blank dashboard.</p></li>
+
+<li><p>Click 
+  
+  
+
+ (Dashboard Settings) at the top of the dashboard.</p></li>
+
+<li><p>Click <strong>Variables</strong>.</p>
+
+
+</li>
+
+<li><p>Enter <em>hostname</em> into the <strong>Name</strong> field.</p></li>
+
+<li><p>Enter <em>Hostname</em> into the <strong>Label</strong> field.</p></li>
+
+<li><p>Select <em>Net-Q</em> from the <strong>Data source</strong> list.</p></li>
+
+<li><p>Enter <em>hostname</em> into the <strong>Query</strong> field.</p></li>
+
+<li><p>Click <strong>Add</strong>.</p>
+
+<p>You should see a preview at the bottom of the hostname values.</p></li>
+
+<li><p>Click 
+  
+  
+
+ to return to the new dashboard.</p></li>
+
+<li><p>Click <strong>Add Query</strong>.</p>
+
+
+</li>
+
+<li><p>Select <em>Net-Q</em> from the <strong>Query</strong> source list.</p></li>
+
+<li><p>Select the interface statistic you want to view from the <strong>Metric</strong> list.</p></li>
+
+<li><p>Click the <strong>General</strong> icon.</p>
+
+</li>
+
+<li><p>Select <em>hostname</em> from the <strong>Repeat</strong> list.</p></li>
+
+<li><p>Set any other parameters around how to display the data.</p></li>
+
+<li><p>Return to the dashboard.</p></li>
+
+<li><p>Add additional panels with other metrics to complete your dashboard.</p></li>
+</ol>
+
+<h2 id="analyze-the-data">Analyze the Data</h2>
+
+<p>Once you have your dashboard configured, you can start analyzing the data:</p>
+
+<ol>
+<li><p>Select the hostname from the variable list at the top left of the charts to see the statistics for that switch or host.</p>
+
+
+</li>
+
+<li><p>Review the statistics, looking for peaks and valleys, unusual patterns, and so forth.</p></li>
+
+<li><p>Explore the data more by modifying the data view in one of several ways using the dashboard tool set:</p>
+
+
+
+
+<ul>
+<li>Select a different time period for the data by clicking the forward or back arrows. The default time range is dependent on the width of your browser window.</li>
+<li>Zoom in on the dashboard by clicking the magnifying glass.</li>
+<li>Manually refresh the dashboard data, or set an automatic refresh rate for the dashboard from the down arrow.</li>
+<li>Add a new variable by clicking the cog wheel, then selecting Variables</li>
+<li>Add additional panels</li>
+<li>Click any chart title to edit or remove it from the dashboard</li>
+<li>Rename the dashboard by clicking the cog wheel and entering the new name</li>
+</ul></li>
+</ol>
+</article>
+    
+        <article class="markdown">
+            
+            <span class="toc3">
+                <h1>
+                    <a id="NetQ-Components"></a>Cumulus NetQ Components</h1>
+            </span>
+
+<p>Cumulus NetQ contains the following applications and key components:</p>
+
+<ul>
+<li>Telemetry data collection and aggregation
+
+<ul>
+<li>NetQ switch agents</li>
+<li>NetQ host agents</li>
+<li>Telemetry data aggregation</li>
+<li>Database</li>
+</ul></li>
+<li>Data streaming</li>
+<li>Network services</li>
+<li>User interfaces</li>
+</ul>
+
+<p>While these function apply to both the on-site and in-cloud solutions, where
+the functions reside varies, as shown here.</p>
+
+
+
+<p>NetQ interfaces with event notification applications, third-party
+analytics tools.</p>
+
+<p>Each of the NetQ components used to gather, store and process data about
+the network state are described here.</p>
+
+<h2 id="netq-agents">NetQ Agents</h2>
+
+<p>NetQ Agents are software installed and running on every monitored <em>node</em>
+in the network - including Cumulus® Linux® switches, Linux bare-metal
+hosts, and virtual machines. The NetQ Agents push network data regularly
+and event information immediately to the NetQ Platform.</p>
+
+<h3 id="switch-agents">Switch Agents</h3>
+
+<p>The NetQ Agents running on Cumulus Linux switches gather the following
+network data via <a href="https://tools.ietf.org/html/rfc3549">Netlink</a>:</p>
+
+<ul>
+<li>Interfaces</li>
+<li>IP addresses (v4 and v6)</li>
+<li>IP routes (v4 and v6)</li>
+<li>Links</li>
+<li>Bridge FDB (MAC Address table)</li>
+<li>ARP Entries/Neighbors (IPv4 and IPv6)</li>
+</ul>
+
+<p>for the following protocols:</p>
+
+<ul>
+<li>Bridging protocols: LLDP, STP, MLAG</li>
+<li>Routing protocols: BGP, OSPF</li>
+<li>Network virtualization: EVPN, LNV, VXLAN</li>
+</ul>
+
+<p>The NetQ Agent is supported on Cumulus Linux 3.3.2 and later.</p>
+
+<h3 id="host-agents">Host Agents</h3>
+
+<p>The NetQ Agents running on hosts gather the same information as that for
+switches, plus the following network data:</p>
+
+<ul>
+<li>Network IP and MAC addresses</li>
+<li>Container IP and MAC addresses</li>
+</ul>
+
+<p>The NetQ Agent obtains container
+information by listening to the Kubernetes orchestration tool.</p>
+
+<p>The NetQ Agent is supported on hosts running Ubuntu 16.04, Red Hat®
+Enterprise Linux 7, and CentOS 7 Operating Systems.</p>
+
+<h2 id="netq-core">NetQ Core</h2>
+
+<p>The NetQ core performs the data collection, storage, and processing
+for delivery to various user interfaces. It is comprised of a collection
+of scalable components running entirely within a single server. The NetQ
+software queries this server, rather than individual devices enabling
+greater scalability of the system. Each of these components is described
+briefly here.</p>
+
+<h3 id="data-aggregation">Data Aggregation</h3>
+
+<p>The data aggregation component collects data coming from all of the NetQ
+Agents. It then filters, compresses, and forwards the data to the
+streaming component. The server monitors for missing messages and also
+monitors the NetQ Agents themselves, providing alarms when appropriate.
+In addition to the telemetry data collected from the NetQ Agents, the
+aggregation component collects information from the switches and hosts,
+such as vendor, model, version, and basic operational state.</p>
+
+<h3 id="data-stores">Data Stores</h3>
+
+<p>Two types of data stores are used in the NetQ product. The first stores
+the raw data, data aggregations, and discrete events needed for quick
+response to data requests. The second stores data based on correlations,
+transformations and processing of the raw data.</p>
+
+<h3 id="real-time-streaming">Real-time Streaming</h3>
+
+<p>The streaming component processes the incoming raw data from the
+aggregation server in real time. It reads the metrics and stores them as
+a time series, and triggers alarms based on anomaly detection,
+thresholds, and events.</p>
+
+<h3 id="network-services">Network Services</h3>
+
+<p>The network services component monitors protocols and services operation
+individually and on a network-wide basis and stores status details.</p>
+
+<h3 id="user-interfaces">User Interfaces</h3>
+
+<p>NetQ data is available through several
+user interfaces:</p>
+
+<ul>
+<li>NetQ CLI (command line interface)</li>
+<li>NetQ UI (graphical user interface)</li>
+<li>NetQ RESTful API (representational state transfer application programming interface)</li>
+</ul>
+
+<p>The CLI and UI query the RESTful API for
+the data to present. Standard integrations can be configured to
+integrate with third-party notification tools.</p>
+</article>
+    
+        <article class="markdown">
+            
+            <span class="toc3">
+                <h1>
+                    <a id="DC-Deploy-Arch"></a>Data Center Network Deployments</h1>
+            </span>
+
+<p>There are two deployment types that are commonly deployed for network management in the data center:</p>
+
+<ul>
+<li>Out-of-Band Management (recommended)</li>
+<li>In-band Management</li>
+</ul>
+
+<p>A summary of each type is provided here.</p>
+
+
+<div class="notices note" > <p>Cumulus NetQ operates over layer 3, and can be used in both layer 2 bridged and
+layer 3 routed environments. Cumulus Networks always recommends layer 3
+routed environments whenever possible.</p>
+ </div>
+
+
+<h3 id="out-of-band-management-deployment">Out-of-Band Management Deployment</h3>
+
+<p>Cumulus Networks recommends deploying NetQ on an out-of-band (OOB)
+management network to separate network management traffic from standard
+network data traffic, but it is not required. This figure shows a sample
+CLOS-based network fabric design for a data center using an OOB
+management network overlaid on top, where NetQ is deployed.</p>
+
+<p>The physical <em>network</em> hardware includes:</p>
+
+<ul>
+<li><strong>Spine</strong> switches: where data is
+aggregated and distributed ; also known as an aggregation switch,
+end-of-row (EOR) switch or distribution switch</li>
+<li><strong>Leaf</strong> switches: where servers connect to the network; also known
+as a Top of Rack (TOR) or access switch</li>
+<li><strong>Server</strong> hosts: where applications
+are hosted and data served to the user through the network</li>
+<li><strong>Exit</strong> switch: where connections to
+outside the data center occur; also known as
+Border Leaf or Service Leaf</li>
+<li><strong>Edge</strong> server (optional): where the firewall is the demarcation
+point, peering may occur through the exit switch layer to Internet
+(PE) devices</li>
+<li><strong>Internet</strong> device (PE): where provider edge (PE) equipment
+communicates at layer 3 with the network fabric</li>
+</ul>
+
+<p>The diagram shows physical connections (in the form of grey lines)
+between Spine 01 and four Leaf devices and two Exit devices, and Spine
+02 and the same four Leaf devices and two Exit devices. Leaf 01 and Leaf
+02 are connected to each other over a peerlink and act as an MLAG pair
+for Server 01 and Server 02. Leaf 03 and Leaf 04 are connected to each
+other over a peerlink and act as an MLAG pair for Server 03 and Server
+04. The Edge is connected to both Exit devices, and the Internet node is
+connected to Exit 01.</p>
+
+
+
+<p><span class="caption">Data Center Network Example</span></p>
+
+<p>The physical <em>management</em> hardware includes:</p>
+
+<ul>
+<li>OOB Mgmt Switch: aggregation switch that connects to all of the
+network devices through communications with the NetQ Agent on each
+node</li>
+<li>NetQ Platform: hosts the telemetry software, database and user
+interfaces (refer to description above).</li>
+</ul>
+
+<p>These switches are connected to each of the physical network devices
+through a virtual network overlay, shown with purple lines.</p>
+
+
+
+<h3 id="in-band-management-deployment">In-band Management Deployment</h3>
+
+<p>While not the preferred deployment method, you might choose to implement
+NetQ within your data network. In this scenario, there is no overlay and
+all traffic to and from the NetQ Agents and the NetQ Platform traverses
+the data paths along with your regular network traffic. The roles of the
+switches in the CLOS network are the same, except that the NetQ Platform
+performs the aggregation function that the OOB management switch
+performed. If your network goes down, you might not have access to the
+NetQ Platform for troubleshooting.</p>
+
+
+</article>
+</span>
+  </body>
+</html>
